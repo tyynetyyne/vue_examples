@@ -22,46 +22,44 @@
         enter-active-class="animated bounceInUp"
         leave-active-class="animated bounceOutDown"
       >
-        <li v-for="item in skills" :key="item.id">
+        <li v-for="item in getSkills()" :key="item.id">
           {{ item.skill }}
           <i class="fa fa-minus-circle" v-on:click="remove(item.id)"></i>
         </li>
       </transition-group>
     </ul>
-    <p v-if="skills.length >= 1">You have more than one skill</p>
+    <p v-if="getSkills().length >= 1">You have more than one skill</p>
     <p v-else>You have less or equal to 1 skill</p>
   </div>
 </template>
 
 <script>
+import { store } from "./store.js";
+
 export default {
   name: "Skills",
   data() {
     return {
       skill: "",
-      skills: [
-        { skill: "Vue.js", id: 0 },
-        { skill: "Frontend Developer", id: 1 }
-      ]
+      storeState: store.state
     };
   },
   methods: {
     addSkill() {
       this.$validator.validateAll().then(result => {
         if (result) {
-          this.skills.push({
-            skill: this.skill,
-            id: Math.floor(1000000 * Math.random())
-          });
+          store.addSkill(this.skill);
           this.skill = "";
-          // console.log("id", this.skills);
         } else {
           console.log("Not valid");
         }
       });
     },
+    getSkills() {
+      return store.getAll();
+    },
     remove(id) {
-      this.skills = this.skills.filter(item => id !== item.id);
+      store.removeSkill(id);
     }
   }
 };
