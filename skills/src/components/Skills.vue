@@ -54,7 +54,7 @@ export default {
             id: Math.floor(1000000 * Math.random())
           });
           this.skill = "";
-          console.log("id", this.skills);
+          // console.log("id", this.skills);
         } else {
           console.log("Not valid");
         }

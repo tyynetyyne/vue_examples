@@ -12,11 +12,11 @@ export default new Router({
       name: "skills",
       component: Skills
     },
-    {
-      path: "/about/:name",
-      name: "about",
-      component: About
-    },
+    // {
+    //   path: "/about/:name",
+    //   name: "about",
+    //   component: About
+    // },
     {
       path: "/about",
       name: "about",
